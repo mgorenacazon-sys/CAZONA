@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabor de Hogar - RESTAURANTE CAZONA</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#3A2012',
+                            main: '#522F1D',
+                            terracotta: '#D16140',
+                            light: '#FAF6ED',
+                            card: '#FFFDF9',
+                            cream: '#F4EBE1',
+                            gold: '#D4A359'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F4EBE1;
+            color: #3A2012;
+        }
+        .nav-btn {
+            transition: all 0.3s ease;
+        }
+        .nav-btn.active {
+            background-color: #D16140;
+            color: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(209, 97, 64, 0.3);
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- Encabezado y Navegación Principal -->
+    <header class="bg-brand-dark text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            <!-- Logo Marca -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('desayuno')">
+                <div class="w-12 h-12 rounded-full border-2 border-brand-gold bg-brand-main flex items-center justify-center text-brand-gold shadow-md overflow-hidden">
+                    <img src="imagenes/logo.jpg.jpeg" alt="Logo Restaurante Cazona" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h1 class="font-serif text-2xl font-bold tracking-tight text-white leading-tight">RESTAURANTE CAZONA</h1>
+                    <p class="text-xs text-brand-gold italic">Filipenses 4:13 </p>
+                </div>
+            </div>
+
+            <!-- Botones de Navegación entre Ventanas -->
+            <nav class="flex flex-wrap items-center justify-center gap-1 sm:gap-2 bg-brand-main/60 p-1.5 rounded-full border border-brand-gold/20">
+                <button id="btn-desayuno" onclick="switchTab('desayuno')" class="nav-btn active flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-white">
+                    <i class="fa-solid fa-mug-hot"></i> Desayuno
+                </button>
+                <button id="btn-almuerzo" onclick="switchTab('almuerzo')" class="nav-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-amber-100 hover:text-white">
+                    <i class="fa-solid fa-bowl-food"></i> Almuerzo
+                </button>
+                <button id="btn-cena" onclick="switchTab('cena')" class="nav-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-amber-100 hover:text-white">
+                    <i class="fa-solid fa-wine-glass"></i> Cena
+                </button>
+                <button id="btn-resenas" onclick="switchTab('resenas')" class="nav-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-amber-100 hover:text-white">
+                    <i class="fa-solid fa-star"></i> Reseñas
+                </button>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- Contenido Principal Dinámico -->
+    <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
+
+        <!-- ==================== SECCIÓN DESAYUNO ==================== -->
+        <section id="tab-desayuno" class="tab-content active space-y-8">
+            
+            <!-- Banner de Bienvenida -->
+            <div class="bg-brand-card rounded-3xl p-6 md:p-8 border border-brand-gold/20 shadow-sm grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    <span class="bg-brand-cream text-brand-main px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">BIENVENIDOS A NUESTRA MESA</span>
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark leading-tight">
+                        Un rincón donde cada platillo cuenta una historia
+                    </h2>
+                    <p class="text-gray-700 text-sm md:text-base leading-relaxed">
+                        En <strong class="text-brand-terracotta">RESTAURANTE CAZONA</strong> elaboramos cada receta con ingredientes frescos de nuestra localidad y la calidez de la cocina tradicional. Somos una familia apasionada por brindar momentos especiales, sonrisas y platos que reconfortan el alma desde primera hora del día. 
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2 text-xs md:text-sm text-brand-main font-semibold">
+                        <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-brand-terracotta"></i> Abierto desde 7:00 AM</span>
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-heart text-brand-terracotta"></i> Ambiente Agradable</span>
+                    </div>
+                </div>
+                <div class="overflow-hidden rounded-2xl shadow-md border border-brand-cream">
+                    <img src="C:\Users\USUARIO\Desktop\CAZONA RESTAURANT\imagenes\images (7).jpg"
+                         alt="Desayuno artesanal" 
+                         class="w-full h-64 md:h-80 object-cover hover:scale-105 transition-transform duration-500"
+                         onerror="this.src='https://placehold.co/800x600/522F1D/FFF?text=Desayuno+Casero'">
+                </div>
+            </div>
+
+            <!-- Menú de Desayunos del Lunes -->
+            <div class="space-y-6">
+                <!-- Banner Superior del Día -->
+                <div class="bg-brand-card rounded-2xl p-6 border border-brand-gold/30 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-brand-terracotta text-white font-bold px-4 py-2 rounded-xl text-lg tracking-wide uppercase">
+                            LUNES
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-2xl font-bold text-brand-dark">Menú de Desayunos</h3>
+                            <p class="text-xs text-gray-600 mt-1">
+                                <i class="fa-solid fa-mug-hot text-brand-gold mr-1"></i> Comienza tu mañana con nuestras opciones tradicionales y sustanciosas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opciones de Desayuno para el Lunes -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Desayuno Yungueño -->
+                    <div class="bg-brand-card rounded-2xl overflow-hidden border border-brand-gold/20 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div class="h-48 overflow-hidden relative">
+                                <img src="C:\Users\USUARIO\Desktop\CAZONA RESTAURANT\imagenes\images (6).jpg" alt="Desayuno Yungueño" class="w-full h-full object-cover">
+                                <span class="absolute top-3 left-3 bg-brand-main text-white font-bold text-xs px-2.5 py-1 rounded-lg shadow uppercase">
+                                    Tradicional
+                                </span>
+                            </div>
+                            <div class="p-5">
+                                <h4 class="font-serif text-xl font-bold text-brand-dark">Desayuno Yungueño</h4>
+                                <p class="text-gray-600 text-xs mt-2 leading-relaxed">
+                                    Tradicional carne frita jugosa acompañada de huevo frito, platano frito, pan fresco y un reconfortante café de los Yungas o sultana.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Desayuno Americano -->
+                    <div class="bg-brand-card rounded-2xl overflow-hidden border border-brand-gold/20 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div class="h-48 overflow-hidden relative">
+                                <img src="C:\Users\USUARIO\Desktop\CAZONA RESTAURANT\imagenes\images (5).jpg"alt="Desayuno Americano" class="w-full h-full object-cover">
+                                <span class="absolute top-3 left-3 bg-brand-main text-white font-bold text-xs px-2.5 py-1 rounded-lg shadow uppercase">
+                                    Clásico
+                                </span>
+                            </div>
+                            <div class="p-5">
+                                <h4 class="font-serif text-xl font-bold text-brand-dark">Desayuno Americano</h4>
+                                <p class="text-gray-600 text-xs mt-2 leading-relaxed">
+                                    Huevos revueltos o fritos, tocino crujiente, tostadas con mantequilla y mermelada, acompañado de jugo de naranja y café caliente.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECCIÓN ALMUERZO ==================== -->
+        <section id="tab-almuerzo" class="tab-content space-y-6">
+
+            <!-- Banner Superior del Día -->
+            <div class="bg-brand-card rounded-2xl p-6 border border-brand-gold/30 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="bg-brand-terracotta text-white font-bold px-4 py-2 rounded-xl text-lg tracking-wide uppercase">
+                        LUNES
+                    </div>
+                    <div>
+                        <h3 class="font-serif text-2xl font-bold text-brand-dark">Menú Completo de Almuerzo</h3>
+                        <p class="text-xs text-gray-600 mt-1">
+                            <i class="fa-solid fa-utensils text-brand-gold mr-1"></i> Incluye Entrada, Ensalada Buffet libre, Segundo a elección y Postre.
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-brand-cream/60 px-5 py-2.5 rounded-xl border border-brand-gold/20 text-center">
+                    <span class="text-xs text-brand-main font-bold block uppercase">Precio Total</span>
+                    <span class="text-2xl font-bold text-brand-terracotta">20 BS</span>
+                </div>
+            </div>
+
+            <!-- Sección: Incluido en tu Almuerzo (Sopa, Ensalada y Postre) -->
+            <h3 class="font-serif text-xl font-bold text-brand-dark pt-2">Incluido con tu menú:</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- SOPA DEL DÍA -->
+                <div class="bg-brand-card rounded-2xl overflow-hidden border border-brand-gold/20 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="h-40 overflow-hidden relative">
+                            <img src="C:\Users\USUARIO\Desktop\CAZONA RESTAURANT\imagenes\images.jpg" alt="Sopa de Maní" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 bg-brand-main text-white font-bold text-xs px-2.5 py-1 rounded-lg shadow uppercase">
+                                Sopa
+                            </span>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-serif text-lg font-bold text-brand-dark">Sopa de Maní</h4>
+                            <p class="text-gray-600 text-xs mt-1">Cremosa y tradicional sopa de maní con fideos fritos y carne.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ENSALADA BUFFET -->
+                <div class="bg-brand-card rounded-2xl overflow-hidden border border-brand-gold/20 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="h-40 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80" alt="Ensalada Buffet" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 bg-brand-main text-white font-bold text-xs px-2.5 py-1 rounded-lg shadow uppercase">
+                                Ensalada Buffet
+                            </span>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-serif text-lg font-bold text-brand-dark">Buffet de Ensaladas</h4>
+                            <p class="text-gray-600 text-xs mt-1">Servicio libre de pepino, tomate fresco y cebolla picada.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- POSTRE DEL DÍA -->
+                <div class="bg-brand-card rounded-2xl overflow-hidden border border-brand-gold/20 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="h-40 overflow-hidden relative">
+                            <img src="C:\Users\USUARIO\Desktop\CAZONA RESTAURANT\imagenes\images (4).jpg" alt="Postre Gelatina Roja" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 bg-brand-main text-white font-bold text-xs px-2.5 py-1 rounded-lg shadow uppercase">
+                                Postre
+                            </span>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-serif text-lg font-bold text-brand-dark">Gelatina Roja</h4>
+                            <p class="text-gray-600 text-xs mt-1">Deliciosa y fresca gelatina roja servida en taza individual con cucharilla.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Sección: Segundos a Elección -->
+            <h3 class="font-serif text-xl font-bold text-brand-dark pt-4">Elige tu Plato Segundo:</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- Plato 1: Milanesa de Pollo -->
+                <div class="bg-brand-card rounded-2xl overflow-hidden border border-brand-gold/20 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="C:\Users\USUARIO\Desktop\CAZONA RESTAURANT\imagenes\images (1).jpg" alt="Milanesa de Pollo" class="w-full h-full object-cover">
+                            <span class="absolute top-3 right-3 bg-brand-terracotta text-white font-bold text-xs px-2.5 py-1 rounded-lg shadow">
+                                20 BS
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <h4 class="font-serif text-lg font-bold text-brand-dark">Milanesa de Pollo</h4>
+                            <p class="text-gray-600 text-xs mt-2 leading-relaxed">
+                                Crocante milanesa de pollo acompañada de arroz, papas fritas, sopa de maní, ensalada buffet y postre.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plato 2: Chuleta de Res -->
+                <div class="bg-brand-card rounded-2xl overflow-hidden border border-brand-gold/20 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="C:\Users\USUARIO\Desktop\CAZONA RESTAURANT\imagenes\images (2).jpg" alt="Chuleta de Res" class="w-full h-full object-cover">
+                            <span class="absolute top-3 right-3 bg-brand-terracotta text-white font-bold text-xs px-2.5 py-1 rounded-lg shadow">
+                                20 BS
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <h4 class="font-serif text-lg font-bold text-brand-dark">Chuleta de Res</h4>
+                            <p class="text-gray-600 text-xs mt-2 leading-relaxed">
+                                Jugosa chuleta de res a la plancha con guarnición de arroz, papas, sopa de maní, ensalada buffet y postre.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plato 3: Chuleta de Chancho -->
+                <div class="bg-brand-card rounded-2xl overflow-hidden border border-brand-gold/20 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="C:\Users\USUARIO\Desktop\CAZONA RESTAURANT\imagenes\images (3).jpg" alt="Chuleta de Chancho" class="w-full h-full object-cover">
+                            <span class="absolute top-3 right-3 bg-brand-terracotta text-white font-bold text-xs px-2.5 py-1 rounded-lg shadow">
+                                20 BS
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <h4 class="font-serif text-lg font-bold text-brand-dark">Chuleta de Chancho</h4>
+                            <p class="text-gray-600 text-xs mt-2 leading-relaxed">
+                                Tierna chuleta de cerdo sazonada a la perfección, incluye sopa de maní, ensalada buffet y postre.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== SECCIÓN CENA ==================== -->
+        <section id="tab-cena" class="tab-content space-y-8">
+            <div class="text-center max-w-2xl mx-auto">
+                <span class="bg-brand-cream text-brand-main px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">NOCHES ESPECIALES</span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mt-2">Menú de Cenas</h2>
+                <p class="text-gray-600 text-sm mt-2">Una experiencia gastronómica cálida e íntima para compartir al final del día.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Cena 1: Hamburguesas -->
+                <div class="bg-brand-card rounded-2xl overflow-hidden border border-brand-gold/20 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="Hamburguesas" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/3A2012/FFF?text=Hamburguesas'">
+                            <span class="absolute top-3 right-3 bg-brand-terracotta text-white font-bold text-xs px-2.5 py-1 rounded-lg shadow">
+                                25 BS
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <h4 class="font-serif text-lg font-bold text-brand-dark">Hamburguesas</h4>
+                            <p class="text-gray-600 text-xs mt-2 leading-relaxed">
+                                Deliciosas hamburguesas caseras acompañadas de queso, verduras frescas y papas fritas crocantes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cena 2: Milanesa Napolitana -->
+                <div class="bg-brand-card rounded-2xl overflow-hidden border border-brand-gold/20 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="C:\Users\USUARIO\Desktop\CAZONA RESTAURANT\imagenes\images (8).jpg"alt="Milanesa Napolitana" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/3A2012/FFF?text=Milanesa+Napolitana'">
+                            <span class="absolute top-3 right-3 bg-brand-terracotta text-white font-bold text-xs px-2.5 py-1 rounded-lg shadow">
+                                30 BS
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <h4 class="font-serif text-lg font-bold text-brand-dark">Milanesa Napolitana</h4>
+                            <p class="text-gray-600 text-xs mt-2 leading-relaxed">
+                                Milanesa dorada cubierta con salsa de tomate de la casa, jamón y abundante queso derretido.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cena 3: Pollo al Spiedo -->
+                <div class="bg-brand-card rounded-2xl overflow-hidden border border-brand-gold/20 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="C:\Users\USUARIO\Desktop\CAZONA RESTAURANT\imagenes\images (9).jpg" alt="Pollo al Spiedo" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/3A2012/FFF?text=Pollo+al+Spiedo'">
+                            <span class="absolute top-3 right-3 bg-brand-terracotta text-white font-bold text-xs px-2.5 py-1 rounded-lg shadow">
+                                28 BS
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <h4 class="font-serif text-lg font-bold text-brand-dark">Pollo al Spiedo</h4>
+                            <p class="text-gray-600 text-xs mt-2 leading-relaxed">
+                                Jugoso y sazonado pollo al spiedo horneado a fuego lento, servido con papas fritas y ensalada.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECCIÓN RESEÑAS Y SUGERENCIAS PRIVADAS ==================== -->
+        <section id="tab-resenas" class="tab-content space-y-8">
+            <div class="text-center max-w-2xl mx-auto">
+                <span class="bg-brand-cream text-brand-main px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">BUZÓN PRIVADO</span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mt-2">Danos tu Opinión o Sugerencia</h2>
+                <p class="text-gray-600 text-sm mt-2">Tus comentarios nos llegan directamente a nosotros de forma privada para seguir mejorando.</p>
+            </div>
+
+            <div class="max-w-xl mx-auto bg-brand-card rounded-2xl p-6 md:p-8 border border-brand-gold/30 shadow-sm">
+                <h3 class="font-serif text-xl font-bold text-brand-dark mb-4 text-center">Enviar Mensaje al Restaurante</h3>
+                <form id="review-form" onsubmit="sendToWhatsApp(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-brand-main mb-1">Nombre Completo</label>
+                        <input type="text" id="review-name" required placeholder="Tu nombre" 
+                               class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-terracotta">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-brand-main mb-1">Calificación</label>
+                        <div class="flex gap-2 text-2xl text-gray-300" id="star-rating">
+                            <i class="fa-solid fa-star cursor-pointer hover:text-amber-400 transition" onclick="setRating(1)"></i>
+                            <i class="fa-solid fa-star cursor-pointer hover:text-amber-400 transition" onclick="setRating(2)"></i>
+                            <i class="fa-solid fa-star cursor-pointer hover:text-amber-400 transition" onclick="setRating(3)"></i>
+                            <i class="fa-solid fa-star cursor-pointer hover:text-amber-400 transition" onclick="setRating(4)"></i>
+                            <i class="fa-solid fa-star cursor-pointer hover:text-amber-400 transition" onclick="setRating(5)"></i>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-brand-main mb-1">Recomendación o Algo que nos Faltó</label>
+                        <textarea id="review-comment" rows="4" required placeholder="Dinos qué te pareció el servicio, qué platillo nos falta o qué podemos mejorar..." 
+                                  class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-terracotta"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-3 bg-green-600 text-white rounded-xl font-semibold text-sm hover:bg-green-700 transition shadow-sm flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Enviar Sugerencia Privada
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Pie de Página -->
+    <footer class="bg-[#3A2012] text-white py-6 border-t border-brand-gold/10">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            
+            <!-- Columna Izquierda: Título y Lema -->
+            <div class="text-center md:text-left space-y-1">
+                <h3 class="font-serif font-bold text-lg md:text-xl text-[#D4A359] tracking-wide">
+                    Sabor de Hogar - Restaurante Cazona
+                </h3>
+                <p class="text-xs md:text-sm text-[#D16140] font-medium">
+                    Atención cálida, buena comida y momentos para recordar.
+                </p>
+            </div>
+
+            <!-- Columna Derecha: Dirección y Teléfono -->
+            <div class="flex flex-wrap items-center justify-center md:justify-end gap-6 text-xs md:text-sm text-gray-300">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-location-dot text-[#D16140] text-base"></i>
+                    <span>Julio's Hotel</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-phone text-[#D16140] text-base"></i>
+                    <span>+591 78768203</span>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Lógica JavaScript Interactiva -->
+    <script>
+        // Puntuación actual del formulario
+        let selectedRating = 5;
+
+        // Cambiar entre Pestañas (Ventanas)
+        function switchTab(tabName) {
+            // Ocultar todas las secciones
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Desactivar todos los botones
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Activar la sección seleccionada
+            const selectedTab = document.getElementById(`tab-${tabName}`);
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+            }
+
+            // Activar el botón seleccionado
+            const selectedBtn = document.getElementById(`btn-${tabName}`);
+            if (selectedBtn) {
+                selectedBtn.classList.add('active');
+            }
+
+            // Desplazar suavemente hacia arriba
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Configurar la calificación con estrellas
+        function setRating(rating) {
+            selectedRating = rating;
+            const stars = document.querySelectorAll('#star-rating i');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.remove('text-gray-300');
+                    star.classList.add('text-amber-400');
+                } else {
+                    star.classList.remove('text-amber-400');
+                    star.classList.add('text-gray-300');
+                }
+            });
+        }
+
+        // Enviar la sugerencia directamente a tu WhatsApp de forma privada
+        function sendToWhatsApp(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('review-name').value.trim();
+            const comment = document.getElementById('review-comment').value.trim();
+            const phone = "59178768203"; // Tu número de WhatsApp
+
+            let starsText = "⭐".repeat(selectedRating);
+
+            const message = `Hola Restaurante Cazona, tengo una sugerencia/reseña privada:%0A%0A` +
+                            `👤 *Nombre:* ${encodeURIComponent(name)}%0A` +
+                            `⭐ *Calificación:* ${starsText} (${selectedRating}/5)%0A` +
+                            `💬 *Comentario/Recomendación:* ${encodeURIComponent(comment)}`;
+
+            const whatsappUrl = `https://wa.me/${phone}?text=${message}`;
+
+            // Abrir WhatsApp en una nueva pestaña
+            window.open(whatsappUrl, '_blank');
+
+            // Limpiar formulario
+            document.getElementById('review-name').value = '';
+            document.getElementById('review-comment').value = '';
+            setRating(5);
+        }
+
+        // Inicializar al cargar
+        window.onload = function() {
+            setRating(5);
+        };
+    </script>
+</body>
+</html>
